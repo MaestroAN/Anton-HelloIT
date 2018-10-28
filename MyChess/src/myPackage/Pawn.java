@@ -1,4 +1,5 @@
 package myPackage;
+
 public class Pawn extends Figure {
 
     public Pawn(boolean isWhite) {
@@ -7,27 +8,48 @@ public class Pawn extends Figure {
 
     @Override
     public boolean checkTheoreticalCorrectness(Move move) {
-        int diffY = move.to.y - move.from.y;
-        int diffX = move.to.x - move.from.y;
+        int diffY = (move.from.y ) - (move.to.y );
+        int diffX = (move.from.x ) - (move.to.x );
 
 
-        if (isWhite && (diffY < 0 || diffY > 2)) {
-            return false;
-        } else if (!isWhite && (diffY > 0 || diffY < -2)) {
-            return false;
+        if (diffY == 0) {
+            if (isWhite && ((move.from.x + 1) == 7)) {
+                if (diffX == 1 || diffX == 2) {
+                    return true;
+                }
+            } else if (!isWhite && ((move.from.x + 1) == 2)) {
+                if (diffX == -1 || diffX == -2) {
+                    return true;
+                }
+            } else if (isWhite){
+                if (diffX == 1 ){
+                    return true;
+                }
+            } else if (!isWhite){
+                if (diffX == -1){
+                    return true;
+                }
+            }
+        } else if (Math.abs(diffY) == 1){
+            if (isWhite){
+                if (diffX == 1){
+                    return true;
+                }
+            } else if (!isWhite){
+                if (diffX == -1){
+                    return true;
+                }
+            }
         }
-
-        if (diffX != 0 && diffX != 1) {
-            return false;
-        }
-
-        if (diffX == 1 && Math.abs(diffY) != 1) {
-            return false;
-        }
-
-        return true;
+        return false;
     }
 
+    public boolean canMoveForward(String string){
+        if (string.equals("\u2014")) {
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public String toString() {

@@ -4,6 +4,7 @@ public class GameField {
     private Cell[][] board; /*Entire size of game field*/
     private boolean whiteTurn; /*Moze luchse controller reshaet?*/
 
+
     public GameField() {
         this.board = new Cell[8][8];
         this.whiteTurn = true;
@@ -55,17 +56,23 @@ public class GameField {
         }
     }
 
+
     public void makeMove(Move move) throws MyChessException {
         if (!this.coordsInBound(move)) {
             throw new MyChessException("Coordinates out of bounds");
         } else {
+            Pawn pawn = new Pawn(whiteTurn);
             Cell from = board[move.from.x][move.from.y];
+            Cell to = board[move.to.x][move.to.y];
             if (from.isEmpty()) {
                 throw new MyChessException("Cell is Empty, pick another Cell");
             } else if (from.figure().isWhite != this.whiteTurn) {
-                throw new MyChessException("You try to move figure of another color, try to pick another figure");
+                throw new MyChessException("You try to move figure of another color, try to pick  figure of your color");
+            } else if (!pawn.checkTheoreticalCorrectness(move)){
+                throw  new MyChessException("This figure can't move like that");
+            } else if (!pawn.canMoveForward(to.toString())){
+                throw new MyChessException("Pawn can eat only PO DIAGONALI");
             } else {
-
                 board[move.to.x][move.to.y] = from;
                 board[move.from.x][move.from.y] = new Cell();
                 this.whiteTurn = !this.whiteTurn;
