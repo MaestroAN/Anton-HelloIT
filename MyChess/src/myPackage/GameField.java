@@ -68,10 +68,8 @@ public class GameField {
                 throw new MyChessException("Cell is Empty, pick another Cell");
             } else if (from.figure().isWhite != this.whiteTurn) {
                 throw new MyChessException("You try to move figure of another color, try to pick  figure of your color");
-            } else if (!pawn.checkTheoreticalCorrectness(move)){
+            } else if (!pawn.checkTheoreticalCorrectness(move , to )){
                 throw  new MyChessException("This figure can't move like that");
-            } else if (!pawn.canMoveForward(to.toString())){
-                throw new MyChessException("Pawn can eat only PO DIAGONALI");
             } else {
                 board[move.to.x][move.to.y] = from;
                 board[move.from.x][move.from.y] = new Cell();

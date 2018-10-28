@@ -11,6 +11,6 @@ public abstract class Figure {
         return this.isWhite;
     }
 
-    abstract public boolean checkTheoreticalCorrectness(Move move);
+    abstract public boolean checkTheoreticalCorrectness(Move move, Cell to);
     public abstract String toString();
 }

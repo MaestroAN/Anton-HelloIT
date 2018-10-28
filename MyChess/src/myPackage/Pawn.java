@@ -7,7 +7,7 @@ public class Pawn extends Figure {
     }
 
     @Override
-    public boolean checkTheoreticalCorrectness(Move move) {
+    public boolean checkTheoreticalCorrectness(Move move, Cell to) {
         int diffY = (move.from.y ) - (move.to.y );
         int diffX = (move.from.x ) - (move.to.x );
 
@@ -30,7 +30,7 @@ public class Pawn extends Figure {
                     return true;
                 }
             }
-        } else if (Math.abs(diffY) == 1){
+        } else if ((Math.abs(diffY) == 1) && !canMoveForward(to)){
             if (isWhite){
                 if (diffX == 1){
                     return true;
@@ -44,8 +44,8 @@ public class Pawn extends Figure {
         return false;
     }
 
-    public boolean canMoveForward(String string){
-        if (string.equals("\u2014")) {
+    public boolean canMoveForward(Cell to){
+        if (to.toString().equals("\u2014")) {
             return true;
         }
         return false;
