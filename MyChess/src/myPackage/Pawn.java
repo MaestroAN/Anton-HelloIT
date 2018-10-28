@@ -12,7 +12,7 @@ public class Pawn extends Figure {
         int diffX = (move.from.x ) - (move.to.x );
 
 
-        if (diffY == 0) {
+        if (diffY == 0 && canMoveForward(to)) {
             if (isWhite && ((move.from.x + 1) == 7)) {
                 if (diffX == 1 || diffX == 2) {
                     return true;
